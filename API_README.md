@@ -29,15 +29,15 @@ Character is comprised of:
         required: true,
     },
     level: {
-        type: number,
+        type: Number,
         required: true,
     },
     class: {
-        type: string,
+        type: String,
         required: true,
     },
     race: {
-        type: string,
+        type: String,
         required: true,
     },
     skills: [skillSchema],
@@ -51,7 +51,7 @@ Items are comprised of:
         required: true,
     },
     description: {
-        type: string,
+        type: String,
     }
 ```
 #### SKILLS
@@ -66,7 +66,7 @@ Skills are comprised of:
         enum: true,
     }
     description: {
-        type: string,
+        type: String,
     }
 ```
 

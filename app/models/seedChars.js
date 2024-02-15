@@ -6,9 +6,9 @@ const Char = require('./character')
 const db = require('../../config/db')
 
 const startChars = [
-    { name: 'Eldorin', age: 120, level: 5, class: 'Wizard', race: 'Elf' },
-    { name: 'Lylthia Shadowheart', age: 25, level: 3, class: 'Rogue', race: 'Halfling' },
-    { name: 'Xander-9', age: 35, level: 5, class: 'Mechanist', race: 'Android' }
+    { name: 'Eldorin', age: 120, level: 5, class: 'Wizard', race: 'Elf', skills: ['Arcana', 'Nature'], items: ['Dagger', 'Spellbook', 'Backpack', 'Cloak']},
+    { name: 'Lylthia Shadowheart', age: 25, level: 3, class: 'Rogue', race: 'Halfling', skills: ['Stealth', 'Thievery'], items: ['Shortsword', 'Leather Armor', 'Lockpicks', 'Rope']},
+    { name: 'Xander-9', age: 35, level: 5, class: 'Fighter', race: 'Android', skills: ['Athletics', 'Intimidation'], items: ['Greatsword', 'Chain Shirt', 'Shield', 'Rations']}
 ]
 
 
