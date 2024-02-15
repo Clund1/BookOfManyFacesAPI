@@ -33,6 +33,23 @@ const router = express.Router()
 // GET /characters
 router.get('/characters', (req, res, next) => {
 	Character.find()
+    .populate('owner')
+		.then((characters) => {
+			// `characters` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return characters.map((character) => character.toObject())
+		})
+		// respond with status 200 and JSON of the characters
+		.then((characters) => res.status(200).json({ characters: characters }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// SHOW USER-ONLY CHARACTERS
+// GET /characters/mine
+router.get('/characters/mine', requireToken, (req, res, next) => {
+	Character.find({ owner: req.user.id })
 		.then((characters) => {
 			// `characters` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -46,10 +63,11 @@ router.get('/characters', (req, res, next) => {
 })
 
 // SHOW
-// GET /characters/5a7db6c74d55bc51bdf39793
+// GET /characters/:id
 router.get('/characters/:id', (req, res, next) => {
 	// req.params.id will be set based on the `:id` in the route
 	Character.findById(req.params.id)
+    .populate('owner')
 		.then(handle404)
 		// if `findById` is succesful, respond with 200 and "character" JSON
 		.then((character) => res.status(200).json({ character: character.toObject() }))

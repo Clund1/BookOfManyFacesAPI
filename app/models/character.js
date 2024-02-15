@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 
+const skillSchema = require('./skill')
+const itemSchema = require('./item')
+
 //LISTS FOR CHARACTER CLASSES AND RACES
 const raceEnum = [
     'Android',
@@ -52,8 +55,8 @@ const charSchema = new mongoose.Schema(
             enum: raceEnum,
             required: true,
         },
-        // skills: [skillSchema],
-        // items: [itemSchema],
+        skills: [skillSchema],
+        items: [itemSchema],
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
