@@ -7,8 +7,8 @@ const db = require('../../config/db')
 
 const startChars = [
     { name: 'Eldorin', age: 120, level: 5, class: 'Wizard', race: 'Elf' },
-    { name: 'Drogar Stonefist', age: 65, level: 7, class: 'Fighter', race: 'Dwarf' },
-    { name: 'Lylthia Shadowheart', age: 25, level: 3, class: 'Rogue', race: 'Halfling' }
+    { name: 'Lylthia Shadowheart', age: 25, level: 3, class: 'Rogue', race: 'Halfling' },
+    { name: 'Xander-9', age: 35, level: 5, class: 'Mechanist', race: 'Android' }
 ]
 
 
