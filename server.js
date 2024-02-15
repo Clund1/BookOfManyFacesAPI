@@ -15,7 +15,7 @@ const requestLogger = require('./lib/request_logger')
 // require database configuration logic
 // `db` will be the actual Mongo URI as a string
 const db = require('./config/db')
-
+console.log(db)
 // require configured passport authentication middleware
 const auth = require('./lib/auth')
 
