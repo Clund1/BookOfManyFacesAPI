@@ -65,13 +65,13 @@ router.get('/characters/mine', requireToken, (req, res, next) => {
 // SHOW
 // GET /characters/:id
 router.get('/characters/:id', (req, res, next) => {
-	// req.params.id will be set based on the `:id` in the route
+
 	Character.findById(req.params.id)
     .populate('owner')
 		.then(handle404)
-		// if `findById` is succesful, respond with 200 and "character" JSON
+
 		.then((character) => res.status(200).json({ character: character.toObject() }))
-		// if an error occurs, pass it to the handler
+
 		.catch(next)
 })
 

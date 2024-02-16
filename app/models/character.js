@@ -4,32 +4,6 @@ const skillSchema = require('./skill')
 const itemSchema = require('./item')
 
 //LISTS FOR CHARACTER CLASSES AND RACES
-const raceEnum = [
-    'Android',
-    'Dwarf',
-    'Elf',
-    'Gnome',
-    'Goblin',
-    'Halfling',
-    'Human',
-    'Half-Elf',
-    'Orc',
-    'Vesk',
-];
-const classEnum = [
-    'Alchemist',
-    'Mechanist',
-    'Bard',
-    'Champion',
-    'Cleric',
-    'Artificer',
-    'Fighter',
-    'Monk',
-    'Ranger',
-    'Rogue',
-    'Technomancer',
-    'Wizard',
-];
 
 const charSchema = new mongoose.Schema(
 	{
@@ -39,7 +13,6 @@ const charSchema = new mongoose.Schema(
         },
         age: {
             type: Number,
-            required: true,
         },
         level: {
             type: Number,
@@ -47,12 +20,36 @@ const charSchema = new mongoose.Schema(
         },
         class: {
             type: String,
-            enum: classEnum,
+            enum: [
+                'Alchemist',
+                'Mechanist',
+                'Bard',
+                'Champion',
+                'Cleric',
+                'Artificer',
+                'Fighter',
+                'Monk',
+                'Ranger',
+                'Rogue',
+                'Technomancer',
+                'Wizard',
+            ],
             required: true,
         },
         race: {
             type: String,
-            enum: raceEnum,
+            enum: [
+                'Android',
+                'Dwarf',
+                'Elf',
+                'Gnome',
+                'Goblin',
+                'Halfling',
+                'Human',
+                'Half-Elf',
+                'Orc',
+                'Vesk',
+            ],
             required: true,
         },
         skills: [skillSchema],

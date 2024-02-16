@@ -15,7 +15,7 @@ const router = express.Router()
 // ROUTES //
 
 // CREATE
-// POST /characters
+// POST /items/:charId
 router.post('/items/:charId', removeBlanks, (req, res, next) => {
     //Save Item From req.body
     const item = req.body.item
@@ -23,13 +23,12 @@ router.post('/items/:charId', removeBlanks, (req, res, next) => {
     const charId = req.params.charId
 
 	Character.findById(charId)
-		// Check for Character
         .then(handle404)
 		.then((character) => {
             character.items.push(item)
 			return character.save()
 		})
-        .then(res.status(201).json({ character: character}))
+        .then(res.status(201).json({ character: Character}))
 		.catch(next)
 })
 
@@ -42,42 +41,29 @@ router.patch('/items/:charId/:itemId', requireToken, removeBlanks, (req, res, ne
 	Character.findById(charId)
 		.then(handle404)
 		.then((character) => {
-			// Make Item Singular
             const theItem = character.items.id(itemId)
-			// it will throw an error if the current user isn't the owner
 			requireOwnership(req, character)
-            //Update Existing Item
-            theItem.set(req.body.toy)
-			// pass the result of Mongoose's `.update` to the next `.then`
+            theItem.set(req.body.item)
 			return character.save
 		})
-		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
-		// if an error occurs, pass it to the handler
 		.catch(next)
 })
 
 // DESTROY
 // DELETE /items/:charId/:itemId
 router.delete('/items/:charId/:itemId', requireToken, removeBlanks, (req, res, next) => {
-	//Obtain IDs from req.params
     const { charId, itemId } = req.params
-
 	Character.findById(charId)
 		.then(handle404)
 		.then((character) => {
-			// Make Item Singular
             const theItem = character.items.id(itemId)
-			// it will throw an error if the current user isn't the owner
 			requireOwnership(req, character)
-            //Delete Existing Item
-            theItem.set(req.body.item)
-			// pass the result of Mongoose's `.update` to the next `.then`
+            theItem.deleteOne()
+
 			return character.save
 		})
-		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
-		// if an error occurs, pass it to the handler
 		.catch(next)
 })
 

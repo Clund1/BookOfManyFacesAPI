@@ -63,7 +63,6 @@ const itemSchema = new mongoose.Schema({
             'Tower Shield',
         ],
         default: 'Backpack',
-        required: true,
     },
     description: {
         type: String,
